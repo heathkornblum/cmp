@@ -1,0 +1,73 @@
+apply plugin: 'com.android.library'
+
+apply plugin: 'kotlin-android'
+
+apply plugin: 'kotlin-android-extensions'
+
+android {
+    compileSdkVersion 28
+    defaultConfig {
+        minSdkVersion 19
+        targetSdkVersion 28
+        versionCode 1
+        versionName "1.0"
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+    }
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+            buildConfigField "String", "CMP_URL", "\"https://cdn.conversant.mgr.consensu.org/gdpr/cmp/inapp/1.0.0/gdpr-cmp-bootstrap.js\""
+
+
+        }
+        debug{
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+//            buildConfigField "String", "CMP_URL", "\"http://cdn-qa.mplxtms.com/gdpr/inapp/1.0.0/gdpr-cmp-bootstrap.js\""
+//            buildConfigField "String", "CMP_URL", "\"https://cdn.conversant.mgr.consensu.org/gdpr/cmp/inapp/1.0.0/gdpr-cmp-bootstrap.js\""
+//            buildConfigField "String", "CMP_URL", "\"http://dtsjc00gdp01q.dc.dotomi.net:8123/gdpr-cmp/gdpr-cmp-bootstrap.js \""
+//            buildConfigField "String", "CMP_URL", "\"http://cdn-qa.conversant.mgr.consensu.org/gdpr-cmp/inapp/2.0.0/gdpr-cmp-bootstrap.js\""
+            buildConfigField "String", "CMP_URL", "\"http://cdn-qa.conversant.mgr.consensu.org/gdpr-cmp/3.0/gdpr-cmp-bootstrap.js\""
+        }
+    }
+
+    flavorDimensions "version"
+
+    productFlavors {
+        qa {
+            dimension "version"
+            versionNameSuffix "-qa"
+//            buildConfigField "String", "CMP_URL", "\"http://cdn-qa.mplxtms.com/gdpr/inapp/1.0.0/gdpr-cmp-bootstrap.js\""
+        }
+
+        prod {
+            dimension "version"
+            versionNameSuffix "-release"
+//            buildConfigField "String", "CMP_URL", "\"https://cdn.conversant.mgr.consensu.org/gdpr/cmp/inapp/1.0.0/gdpr-cmp-bootstrap.js\""
+        }
+    }
+
+    testOptions {
+        unitTests{
+            includeAndroidResources = true
+        }
+    }
+}
+
+dependencies {
+    implementation fileTree(dir: 'libs', include: ['*.jar'])
+    implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
+    implementation 'androidx.appcompat:appcompat:1.1.0'
+    implementation 'androidx.constraintlayout:constraintlayout:1.1.3'
+    implementation 'androidx.annotation:annotation:1.1.0'
+
+    testImplementation 'junit:junit:4.13'
+    testImplementation 'org.robolectric:robolectric:4.3.1'
+    androidTestImplementation 'androidx.test:runner:1.2.0'
+    androidTestImplementation 'androidx.test.espresso:espresso-core:3.2.0'
+    implementation 'com.google.android.gms:play-services-analytics:17.0.0'
+    implementation 'org.jetbrains.kotlinx:kotlinx-coroutines-core:1.3.3'
+    implementation 'org.jetbrains.kotlinx:kotlinx-coroutines-android:1.3.3'
+
+}
